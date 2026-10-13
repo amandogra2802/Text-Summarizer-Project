@@ -216,3 +216,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# macOS metadata
+.DS_Store
+
+# Generated datasets, model weights, and training artifacts
+artifacts/
+
+# Large model and training-state files
+*.safetensors
+*.pt
+*.pth

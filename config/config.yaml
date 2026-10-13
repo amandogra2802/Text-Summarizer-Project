@@ -1,0 +1,43 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  dataset_name: FiscalNote/billsum
+  cache_dir: artifacts/data_ingestion/cache
+
+data_validation:
+  root_dir: artifacts/data_validation
+  status_file: artifacts/data_validation/status.txt
+  required_columns:
+    - text
+    - summary
+    - title
+  required_splits:
+    - train
+    - test
+    - ca_test
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  tokenized_dataset_dir: artifacts/data_transformation/tokenized_billsum
+  max_input_length: 1024
+  max_target_length: 128
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+  model_checkpoint: facebook/bart-large-cnn
+  trained_model_dir: artifacts/model_trainer/bart-billsum
+  tokenizer_dir: artifacts/model_trainer/tokenizer
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  model_path: artifacts/model_trainer/bart-billsum
+  tokenizer_path: artifacts/model_trainer/tokenizer
+  metric_file_name: artifacts/model_evaluation/rouge_scores.json
+
+prediction:
+  model_path: artifacts/model_trainer/bart-billsum
+  tokenizer_path: artifacts/model_trainer/tokenizer
+  max_input_length: 1024
+  max_new_tokens: 128
+  num_beams: 4
