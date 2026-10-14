@@ -135,14 +135,17 @@ class PredictionPipeline:
         inputs = {
             key: value.to(self.device)
             for key, value in inputs.items()
-        }
+        } 
 
         with torch.inference_mode():
             generated_tokens = self.model.generate(
                 **inputs,
                 max_new_tokens=self.config.max_new_tokens,
+                min_length=10,
                 num_beams=self.config.num_beams,
                 do_sample=False,
+                length_penalty=1.0,
+                early_stopping=True,
                 no_repeat_ngram_size=3,
             )
 
