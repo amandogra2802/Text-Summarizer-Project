@@ -7,13 +7,12 @@ ENV PYTHONPATH=/app/src
 
 WORKDIR /app
 
-COPY requirements.txt .
+# Copy the project files first so pip can find setup.py
+COPY . .
 
 RUN python -m pip install --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir "uvicorn[standard]"
-
-COPY . .
 
 EXPOSE 8000
 
